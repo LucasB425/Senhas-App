@@ -1,98 +1,104 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { colors, commonStyles, fontMono } from '../lib/styles';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+export default function Welcome() {
+  const router = useRouter();
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <View style={styles.screen}>
+      <View style={styles.content}>
+        <Text style={styles.systemText}>PERSONAL SECURITY SYSTEM // V4</Text>
+        <View style={styles.divider} />
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+        <View style={styles.iconBox}>
+          <Ionicons name="shield-checkmark" size={58} color={colors.green} />
+        </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <Text style={styles.title}>MEU COFRE</Text>
+        <Text style={styles.subtitle}>
+          Guarde e consulte suas senhas em um só lugar.
+        </Text>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+        <View style={styles.statusBox}>
+          <Text style={styles.statusText}>STATUS: SISTEMA PRONTO</Text>
+        </View>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+        <Pressable style={styles.button} onPress={() => router.push('/login')}>
+          <Text style={commonStyles.buttonText}>[ ENTRAR ]</Text>
+        </Pressable>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
+    backgroundColor: colors.black,
     justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    padding: 24,
   },
-  heroSection: {
+  content: {
+    width: '100%',
+    maxWidth: 460,
     alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
   },
-  title: {
+  systemText: {
+    color: colors.greenDim,
+    fontFamily: fontMono,
+    fontSize: 12,
+    letterSpacing: 1.5,
     textAlign: 'center',
   },
-  code: {
-    textTransform: 'uppercase',
+  divider: {
+    width: '100%',
+    height: 1,
+    backgroundColor: colors.line,
+    marginTop: 10,
+    marginBottom: 34,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  iconBox: {
+    width: 96,
+    height: 96,
+    borderWidth: 1,
+    borderColor: colors.green,
+    backgroundColor: colors.panel,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    ...commonStyles.title,
+    fontSize: 34,
+    marginTop: 24,
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: colors.muted,
+    fontFamily: fontMono,
+    lineHeight: 22,
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  statusBox: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: colors.line,
+    backgroundColor: colors.panel,
+    padding: 12,
+    marginTop: 30,
+    alignItems: 'center',
+  },
+  statusText: {
+    color: colors.greenDim,
+    fontFamily: fontMono,
+    fontSize: 12,
+  },
+  button: {
+    ...commonStyles.button,
+    width: '100%',
+    marginTop: 18,
   },
 });
