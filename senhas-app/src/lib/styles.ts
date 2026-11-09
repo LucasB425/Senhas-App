@@ -12,14 +12,14 @@ export const colors = {
   background: '#060a07',
   panel: '#0b120d',
   panelAlt: '#101a13',
-  green: '#58ff84',
-  greenStrong: '#21e65d',
-  greenDim: '#6aa978',
-  greenDark: '#163c22',
-  text: '#d8ffe1',
-  muted: '#789581',
-  line: '#245b32',
-  danger: '#ff5d5d',
+  green: '#0400f7',
+  greenStrong: '#6b5de4',
+  greenDim: '#0066ff',
+  greenDark: '#00c3ff',
+  text: '#23537a',
+  muted: '#00e1ff',
+  line: '#89bcff',
+  danger: '#ff0000',
 };
 
 // Estilos realmente compartilhados entre várias telas.
@@ -36,7 +36,7 @@ export const commonStyles = StyleSheet.create({
     letterSpacing: 1.2,
   },
   label: {
-    fontSize: 12,
+    fontSize: 19,
     color: colors.greenDim,
     marginTop: 16,
     marginBottom: 6,
@@ -76,7 +76,7 @@ export const commonStyles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   dangerButton: {
-    backgroundColor: '#2a0d0d',
+    backgroundColor: '#831212',
     borderColor: colors.danger,
   },
   error: {
